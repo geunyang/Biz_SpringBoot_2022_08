@@ -76,3 +76,20 @@ spring.jpa.hibernate.ddl-auto=update
 * 기존 VO 변수의 이름을 잘못 작성하여 변경하였을 경우 기존의 칼럼을 그대로 두고 
 변경된 칼럼을 추가해 dao.save() method 에 오류를 발생시킨다
 * VO 클래스의 속성 변수 이름 변경시 테이블 드롭 후 다시 만드는것을 권장한다
+
+### 서버 자동 재시작
+* pom.xml 확인
+```
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-devtools</artifactId>
+			<scope>runtime</scope>
+			<optional>true</optional>
+		</dependency>
+```
+* application.properties 에 입력
+```
+spring.devtools.restart.enabled=true
+spring.devtools.remote.restart.enabled=true
+```
+* file-settings-build, Execution...-compiler-Build project Auto...체크-Advanced Settings-Allow auto-make to...체크
