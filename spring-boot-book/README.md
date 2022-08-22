@@ -93,3 +93,74 @@ spring.devtools.restart.enabled=true
 spring.devtools.remote.restart.enabled=true
 ```
 * file-settings-build, Execution...-compiler-Build project Auto...체크-Advanced Settings-Allow auto-make to...체크
+* 변수형이 int 형일 경우
+  기본값이 not null 로 설정되므로
+  임의로 nullable 을 true 로 하여 not null 을 해제 한다
+
+```
+<!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-security -->
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-security</artifactId>
+</dependency>
+<!-- https://mvnrepository.com/artifact/org.thymeleaf.extras/thymeleaf-extras-springsecurity5 -->
+<dependency>
+    <groupId>org.thymeleaf.extras</groupId>
+    <artifactId>thymeleaf-extras-springsecurity5</artifactId>
+</dependency>
+<!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-configuration-processor -->
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-configuration-processor</artifactId>
+</dependency>
+
+```
+
+### yaml
+* yaml 설정파일
+ 계층 구조로 설정하기
+ 공통된 property 항목은 맨 앞줄부터 사용하고
+: 을 붙여준 후 이후의 속성들은 tap 으로 들여쓰기
+
+ ```
+
+spring:
+  devtools:
+    restart.enabled: true
+    remote.restart.enabled: true
+
+
+# DBMS Setting
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/bootDB
+    username: root
+    password: !Korea8080
+
+  jpa:
+    hibernate.ddl-auto: update
+    properties:
+      hibernate.show_sql: true
+      hibernate.format_sql: true
+
+  thymeleaf:
+    prefix: classpath:html/
+    suffix: .html
+    mode: HTML5
+    template-resolver-order: 0
+
+# 외부에서 접근하는 경로
+  mvc:
+    static-path-pattern: /static/**
+# 서버의 폴더 개방하기
+  resources:
+    static-locations: classpath:static/
+
+# logback setup
+logging:
+  config: classpath:logback-local.xml
+  level:
+    com.callor.book: debug
+    org.springframework: debug
+```
+
