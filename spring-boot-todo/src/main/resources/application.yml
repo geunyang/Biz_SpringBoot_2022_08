@@ -1,0 +1,38 @@
+# DBMS setup
+# Data Source
+
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: !Korea8080
+    url: jdbc:mysql://localhost:3306/bootDB
+
+# Use Option
+# create
+# create-drop
+# none
+# validate
+  jpa:
+    hibernate.ddl-auto: create
+
+  thymeleaf:
+    prefix: classpath:html/
+    suffix: .html
+    mode: HTML5
+    template-resolver-order: 0
+    cache: false
+
+# css, js, image
+  web:
+    resources:
+      static-locations: classpath:static/
+      add-mappings: true
+  mvc:
+    static-path-pattern: /static/**
+
+
+# logback-local.xml ??? ????? ????
+logging:
+  config: classpath:log/logback-local.xml
