@@ -16,7 +16,7 @@ spring:
     password: '!Korea8080'
 
   jpa:
-    hibernate.ddl-auto: update
+    hibernate.ddl-auto: create
     properties:
       hibernate.show_sql: true
       hibernate.format_sql: true
@@ -30,7 +30,8 @@ spring:
 # 외부에서 접근하는 경로
   mvc:
     static-path-pattern: /static/**
-# 서버의 폴더 개방하기
+    log-request-details: true
+  # 서버의 폴더 개방하기
   web:
     resources:
       static-locations: classpath:static/

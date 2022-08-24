@@ -1,5 +1,12 @@
 package com.callor.book.model;
-
+/*
+* JPA 프로젝트에서 자주 발생하는 오류메시지
+* 근본적인 원인은 
+* @OneToMany, @ManyToOne 을 설정하면
+* tbl_users table 을 select 할때 tbl_authorities table 을 join 하여 select 한 후 하나의 VO 객체에 담긴다
+* 이 코드를 사용할 때 lombok 의 @ToString 을 사용하면 
+* ToString() method 생성시 문제를 일으킨다
+* 이때문에 @ToString 를 사용하지 않고 직접 만들어야한다*/
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -12,7 +19,8 @@ import java.util.Set;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString
+//@ToString
+//@OneToMany 와 충돌하여 사용하지 않는다
 @Builder
 @Entity
 @Table(name = "tbl_users")
@@ -70,4 +78,18 @@ public class UserVO implements UserDetails {
      */
     @OneToMany(mappedBy = "userVO",cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
     private Set<UserRole> userRoles;
+
+    @Override
+    public String toString() {
+        return "UserVO{" +
+                "username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", enabled=" + enabled +
+                ", accountNonExpired=" + accountNonExpired +
+                ", accountNonLocked=" + accountNonLocked +
+                ", credentialsNonExpired=" + credentialsNonExpired +
+                ", email='" + email + '\'' +
+                ", realname='" + realname + '\'' +
+                '}';
+    }
 }
